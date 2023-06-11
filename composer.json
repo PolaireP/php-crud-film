@@ -1,0 +1,18 @@
+{
+    "name": "peoc0001/sae2-01",
+    "description": "Développement d'une application Web CRUD SAE",
+    "type": "project",
+    "license": "Copyleft",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "William PEOC'H",
+            "email": "william.peoch@etudiant.univ-reims.fr"
+        }
+    ],
+    "require": {}
+}
