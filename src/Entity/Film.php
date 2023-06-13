@@ -198,7 +198,7 @@ class Film
     }
 
     /**
-    * @return $this
+     * @return $this
      */
     protected function update(): Film
     {
@@ -219,7 +219,7 @@ class Film
     }
 
     /**
-    * @return Film
+     * @return Film
      */
     protected function insert(): Film
     {
@@ -238,15 +238,15 @@ class Film
     }
 
     /**
-    * @param int|null $id
-    * @param string $originalLanguage
-    * @param string $originalTitle
-    * @param string $overview
-    * @param string $releaseDate
-    * @param int $runtime
-    * @param string $tagline
-    * @param string $title
-    * @return Film
+     * @param int|null $id
+     * @param string $originalLanguage
+     * @param string $originalTitle
+     * @param string $overview
+     * @param string $releaseDate
+     * @param int $runtime
+     * @param string $tagline
+     * @param string $title
+     * @return Film
      */
     public static function create(?int $id=null, string $originalLanguage, string $originalTitle, string $overview,
                                   string $releaseDate, int $runtime, string $tagline, string $title ): Film
@@ -266,7 +266,7 @@ class Film
 
 
     /**
-    * @return void
+     * @return void
      */
     public function save()
     {
