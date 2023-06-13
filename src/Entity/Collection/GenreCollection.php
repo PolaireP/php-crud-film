@@ -10,6 +10,10 @@ use Entity\Genre;
 class GenreCollection
 {
 
+    /**
+    * @param int $id
+    * @return array
+     */
     public function findByMovieId(int $id) : array {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
@@ -20,6 +24,21 @@ class GenreCollection
             SQL);
 
         $stmt->execute([':movieId' => $id]);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Genre::class);
+    }
+
+    /**
+    * @return array
+     */
+    public function findAll() : array {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+                SELECT *
+                FROM genre
+            SQL);
+
+        $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Genre::class);
     }
