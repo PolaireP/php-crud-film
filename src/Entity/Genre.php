@@ -22,7 +22,7 @@ class Genre
         );
 
         $stmt -> execute([":id" => $id]);
-        $stmt -> setFetchMode(mode:PDO::FETCH_CLASS, className: Genre::class);
+        $stmt -> setFetchMode(PDO::FETCH_CLASS, Genre::class);
         if (($request = $stmt->fetch()) !== false) {
             return $request;
         } else {
