@@ -54,5 +54,18 @@ class Cast
         return $this->orderIndex;
     }
 
+    public function delete(): Cast
+    {
+
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+        DELETE FROM cast
+        WHERE id = :id
+        SQL
+        );
+
+        $stmt->execute([':id' => $this->id]);
+        return $this;
+    }
 
 }
