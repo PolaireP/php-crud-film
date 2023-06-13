@@ -23,12 +23,30 @@ class Cast
     }
 
     /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
      */
     public function getMovieId(): int
     {
         return $this->movieId;
     }
+
+    /**
+     * @param int $movieId
+     */
+    public function setMovieId(int $movieId): void
+    {
+        $this->movieId = $movieId;
+    }
+
+
 
     /**
      * @return int
@@ -39,6 +57,16 @@ class Cast
     }
 
     /**
+     * @param int $peopleId
+     */
+    public function setPeopleId(int $peopleId): void
+    {
+        $this->peopleId = $peopleId;
+    }
+
+
+
+    /**
      * @return string
      */
     public function getRole(): string
@@ -47,12 +75,32 @@ class Cast
     }
 
     /**
+     * @param string $role
+     */
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
+    }
+
+
+
+    /**
      * @return int
      */
     public function getOrderIndex(): int
     {
         return $this->orderIndex;
     }
+
+    /**
+     * @param int $orderIndex
+     */
+    public function setOrderIndex(int $orderIndex): void
+    {
+        $this->orderIndex = $orderIndex;
+    }
+
+
 
     public function delete(): Cast
     {
@@ -65,6 +113,30 @@ class Cast
         );
 
         $stmt->execute([':id' => $this->id]);
+        $this->setId(null);
+
+        return $this;
+    }
+
+    protected function update(): Cast
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+            UPDATE cast
+            SET movieId = :movieId,
+                peopleId = :peopleId,
+                role = :role,
+                orderIndex = :orderIndex
+            WHERE id = :id
+            SQL
+        );
+
+        $stmt->execute([':id' => $this->id,
+            ':movieId' => $this->movieId,
+            ':peopleId' => $this->peopleId,
+            ':role' => $this->role,
+            ':orderIndex' => $this->orderIndex]);
+
         return $this;
     }
 
@@ -85,5 +157,25 @@ class Cast
         $this->id = intval(MyPdo::getInstance()->lastInsertId());
 
         return $this;
+    }
+
+    public static function create(?int $id, int $movieId, int $peopleId, string $role, int $orderIndex): Cast
+    {
+        $cast = new Cast();
+        $cast->setId($id);
+        $cast->setMovieId($movieId);
+        $cast->setPeopleId($peopleId);
+        $cast->setRole($role);
+        $cast->setOrderIndex($orderIndex);
+        return $cast;
+    }
+
+    public function save(): void
+    {
+        if ($this->id === null) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
     }
 }
