@@ -6,6 +6,7 @@ namespace Entity\Collection;
 
 use Database\MyPdo;
 use Entity\Cast;
+use Entity\Exception\EntityNotFoundException;
 use PDO;
 
 class CastCollection
@@ -29,4 +30,25 @@ class CastCollection
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Cast::class);
     }
+
+    public static function findByMovieId(int $movieId): Cast
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+            SELECT id, movieId, peopleId, role, orderIndex
+            FROM cast
+            WHERE movieId = :movieId
+        SQL
+        );
+
+        $stmt->execute([':movieId' => $movieId]);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Cast::class);
+        if (($object = $stmt->fetch()) !== false) {
+            return $object;
+        } else {
+            throw new EntityNotFoundException('ID de film introuvable');
+        }
+    }
+
 }
