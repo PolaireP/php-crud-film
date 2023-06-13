@@ -2,7 +2,8 @@
 declare(strict_types=1);
 
 namespace Entity;
-
+use Database\MyPdo;
+use PDO;
 class Film
 {
     private int $id;
@@ -146,5 +147,23 @@ class Film
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public static function findById(int $id):Film {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+            SELECT id, posterId, originalLanguage, originalTitle, overview, DATE_FORMAT(releaseDate, "%d/%m/%Y"), runtime, tagline, title
+            FROM movie
+            WHERE $id = :id;
+            SQL
+        );
+
+        $stmt -> execute([":id" => $id]);
+        $stmt -> setFetchMode(mode:PDO::FETCH_CLASS, className: Film::class);
+        if (($request = $stmt->fetch()) !== false) {
+            return $request;
+        } else {
+            throw new EntityNotFoundException('Film introuvable');
+        }
     }
 }
