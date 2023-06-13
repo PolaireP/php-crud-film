@@ -10,13 +10,13 @@ use PDO;
 
 class People
 {
-    private int $avatarId;
+    private ?int $avatarId;
     private int $id;
-    private string $birthday;
+    private ?string $birthday;
     private ?string $deathday;
     private string $name;
-    private string $biography;
-    private string $placeOfBirth;
+    private ?string $biography;
+    private ?string $placeOfBirth;
 
 
     /**
