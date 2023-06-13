@@ -237,6 +237,17 @@ class Film
         return $this;
     }
 
+    /**
+    * @param int|null $id
+    * @param string $originalLanguage
+    * @param string $originalTitle
+    * @param string $overview
+    * @param string $releaseDate
+    * @param int $runtime
+    * @param string $tagline
+    * @param string $title
+    * @return Film
+     */
     public static function create(?int $id=null, string $originalLanguage, string $originalTitle, string $overview,
                                   string $releaseDate, int $runtime, string $tagline, string $title ): Film
     {
@@ -251,6 +262,19 @@ class Film
         $film->setTagline($tagline);
         $film->setTitle($title);
         return $film;
+    }
+
+
+    /**
+    * @return void
+     */
+    public function save()
+    {
+        if ($this->id === null) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
     }
 
 }
