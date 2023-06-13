@@ -1,30 +1,33 @@
 {
-    "name": "peoc0001/sae2-01",
-    "description": "Développement d'une application Web CRUD SAE",
-    "type": "project",
-    "license": "Copyleft",
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "William PEOC'H",
-            "email": "william.peoch@etudiant.univ-reims.fr"
-        }
-    ],
-    "require": {
-        "ext-pdo": "*"
-    },
-    "scripts": {
-        "start:linux": [
-            "Composer\\Config::disableProcessTimeout",
-            "bin/run-server.sh"
-        ],
-        "start:windows": [
-            "Composer\\Config::disableProcessTimeout",
-             "bin/run-server.bat"
-        ]
+  "name": "peoc0001/sae2-01",
+  "description": "Développement d'une application Web CRUD SAE",
+  "type": "project",
+  "license": "Copyleft",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "William PEOC'H",
+      "email": "william.peoch@etudiant.univ-reims.fr"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*"
+  },
+  "scripts": {
+    "start:linux": [
+      "Composer\\Config::disableProcessTimeout",
+      "bin/run-server.sh"
+    ],
+    "start:windows": [
+      "Composer\\Config::disableProcessTimeout",
+      "bin/run-server.bat"
+    ]
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.17"
+  }
 }
