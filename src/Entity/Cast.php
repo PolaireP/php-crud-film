@@ -181,14 +181,13 @@ class Cast
         }
     }
 
-    public static function findById(int $id): People
+    public static function findById(int $id): Cast
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<SQL
             SELECT id, movieId, peopleId, role, orderIndex
             FROM cast
             WHERE id = :id
-            ORDER BY name
         SQL
         );
 
