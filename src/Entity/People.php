@@ -74,7 +74,6 @@ class People
             SELECT id, avatarId, DATE_FORMAT(birthday, '%d/%m/%Y') AS birthday, DATE_FORMAT(deathday, '%d/%m/%Y') AS deathday, name, biography, placeOfBirth
             FROM people
             WHERE id = :id
-            ORDER BY name
         SQL
         );
 
