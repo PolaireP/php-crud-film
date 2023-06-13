@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
+use PDO;
 
 class Cast
 {
@@ -176,6 +178,27 @@ class Cast
             $this->insert();
         } else {
             $this->update();
+        }
+    }
+
+    public static function findById(int $id): People
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+            SELECT id, movieId, peopleId, role, orderIndex
+            FROM cast
+            WHERE id = :id
+            ORDER BY name
+        SQL
+        );
+
+        $stmt->execute([':id' => $id]);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Cast::class);
+        if (($object = $stmt->fetch()) !== false) {
+            return $object;
+        } else {
+            throw new EntityNotFoundException('Cast introuvable');
         }
     }
 }
