@@ -196,5 +196,20 @@ class Film
         return $this;
     }
 
+    protected function update(): Film
+    {
+        $request = MyPdo::getInstance()->prepare(<<<SQL
+                UPDATE film
+                SET originalLanguage = :originalLanguage,
+                    overview = :overview,
+                    runtime = :runtime,
+                    tagline = :tagline,
+                    title = :title
+                WHERE id = :id
+            SQL);
 
+        $request->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage,
+            ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
+        return $this;
+    }
 }
