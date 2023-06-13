@@ -188,7 +188,7 @@ class Film
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
                 DELETE FROM film
-                WHERE id = ?;
+                WHERE id = ?
             SQL
         );
         $stmt->execute([$this->id]);
