@@ -68,4 +68,22 @@ class Cast
         return $this;
     }
 
+    protected function insert(): Cast
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+            INSERT INTO cast (id, movieId, peopleId, role, orderIndex)
+            VALUES (:id, :movieId, :peopleId, :role, :orderIndex)
+        SQL
+        );
+
+        $stmt->execute([':id' => $this->id,
+                        ':movieId' => $this->movieId,
+                        ':peopleId' => $this->peopleId,
+                        ':role' => $this->role,
+                        ':orderIndex' => $this->orderIndex]);
+        $this->id = intval(MyPdo::getInstance()->lastInsertId());
+
+        return $this;
+    }
 }
