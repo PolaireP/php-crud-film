@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Entity;
 use Database\MyPdo;
 use PDO;
+use Entity\Exception\EntityNotFoundException;
 class Film
 {
     private ?int $id;
@@ -196,11 +197,15 @@ class Film
         return $this;
     }
 
+    /**
+    * @return $this
+     */
     protected function update(): Film
     {
         $request = MyPdo::getInstance()->prepare(<<<SQL
                 UPDATE film
                 SET originalLanguage = :originalLanguage,
+                    originalTitle = :originalTitle,
                     overview = :overview,
                     runtime = :runtime,
                     tagline = :tagline,
@@ -208,8 +213,27 @@ class Film
                 WHERE id = :id
             SQL);
 
-        $request->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage,
+        $request->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
             ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
+        return $this;
+    }
+
+    /**
+    * @return Film
+     */
+    protected function insert(): Film
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+                    INSERT INTO film (id, originalLanguage, originalTitle, overview, runtime, tagline, title)
+                    VALUES (:id, :originalLanguage, :originalTitle, :overview, :runtime, :tagline, :title)
+                SQL
+        );
+
+        $stmt->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
+            ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
+        $this->id = intval(MyPdo::getInstance()->lastInsertId());
+
         return $this;
     }
 }
