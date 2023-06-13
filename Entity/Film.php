@@ -8,7 +8,7 @@ use Entity\Exception\EntityNotFoundException;
 class Film
 {
     private ?int $id;
-    private ?int $posterId;
+    private ?int $posterId = null;
     private string $originalLanguage;
     private string $originalTitle;
     private string $overview;
@@ -236,4 +236,21 @@ class Film
 
         return $this;
     }
+
+    public static function create(?int $id=null, string $originalLanguage, string $originalTitle, string $overview,
+                                  string $releaseDate, int $runtime, string $tagline, string $title ): Film
+    {
+        $film = new Film();
+        $film->setId($id);
+        $film->setOverview($overview);
+        $film->setOriginalLanguage($$originalLanguage);
+        $film->setOriginalTitle($originalTitle);
+        $film->setOverview($overview);
+        $film->setReleaseDate($releaseDate);
+        $film->setRuntime($runtime);
+        $film->setTagline($tagline);
+        $film->setTitle($title);
+        return $film;
+    }
+
 }
