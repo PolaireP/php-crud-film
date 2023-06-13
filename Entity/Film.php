@@ -6,7 +6,7 @@ use Database\MyPdo;
 use PDO;
 class Film
 {
-    private int $id;
+    private ?int $id;
     private ?int $posterId;
     private string $originalLanguage;
     private string $originalTitle;
@@ -19,6 +19,14 @@ class Film
 
     public function __construct()
     {
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -149,6 +157,10 @@ class Film
         return $this->title;
     }
 
+    /**
+     * @param int $id Identifiant du film
+     * @return Film Instance récupérée
+     */
     public static function findById(int $id):Film {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
@@ -166,4 +178,23 @@ class Film
             throw new EntityNotFoundException('Film introuvable');
         }
     }
+
+    /**
+     * @return $this
+     */
+    public function delete(): Film
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+                DELETE FROM film
+                WHERE id = ?;
+            SQL
+        );
+        $stmt->execute([$this->id]);
+        $this->setId(null);
+
+        return $this;
+    }
+
+
 }
