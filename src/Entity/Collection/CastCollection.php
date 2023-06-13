@@ -51,4 +51,24 @@ class CastCollection
         }
     }
 
+    public static function findByPeopleId(int $peopleId): Cast
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+            SELECT id, movieId, peopleId, role, orderIndex
+            FROM cast
+            WHERE peopleId = :peopleId
+        SQL
+        );
+
+        $stmt->execute([':peopleId' => $peopleId]);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Cast::class);
+        if (($object = $stmt->fetch()) !== false) {
+            return $object;
+        } else {
+            throw new EntityNotFoundException('ID de personne introuvable');
+        }
+    }
+
 }
