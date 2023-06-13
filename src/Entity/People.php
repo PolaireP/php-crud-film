@@ -9,10 +9,9 @@ use PDO;
 
 class People
 {
-    private int $avatarId;
     private int $id;
     private string $birthday;
-    private ?string $deathday;
+    private string $deathday;
     private string $name;
     private string $biography;
     private string $placeOfBirth;
@@ -69,7 +68,7 @@ class People
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<'SQL'
-            SELECT id, avatarId, DATE_FORMAT(birthday, '%d/%m/%Y') AS birthday, DATE_FORMAT(deathday, '%d/%m/%Y') AS deathday, name, biography, placeOfBirth
+            SELECT *
             FROM people
             WHERE id = :id
             ORDER BY name
@@ -79,10 +78,10 @@ class People
         $stmt->execute([':id' => $id]);
 
         $stmt->setFetchMode(PDO::FETCH_CLASS, People::class);
-        if (($object = $stmt->fetch()) !== false) {
-            return $object;
+        if ($reqFetch = $stmt->fetch()) {
+            return $reqFetch;
         } else {
-            throw new EntityNotFoundException('Artiste introuvable');
+            throw new EntityNotFoundException('Personne introuvable');
         }
     }
 }
