@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Html\Form;
 
 use Entity\Film;
-use Entity\GenreCollection;
+use Entity\Collection\GenreCollection;
 use Entity\Exception\ParameterException;
 use Html\Form\Html\StringEscaper;
 
 class FilmForm
 
 {
-    use Html\Form\Html\StringEscaper;
+    use StringEscaper;
     private ?Film $film;
 
     /**
@@ -29,7 +29,7 @@ class FilmForm
         return $this->film;
     }
 
-    public function getHtmlForm(string $action) : string {
+    public static function getHtmlForm(string $action) : string {
 
         $genres = GenreCollection::findAll();
         $genreChoices = <<<HTML
