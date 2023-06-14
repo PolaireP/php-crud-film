@@ -165,9 +165,9 @@ class Film
     public static function findById(int $id):Film {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-            SELECT id, posterId, originalLanguage, originalTitle, overview, DATE_FORMAT(releaseDate, "%d/%m/%Y"), runtime, tagline, title
+            SELECT id, posterId, originalLanguage, originalTitle, overview, DATE_FORMAT(releaseDate, "%d/%m/%Y") as releaseDate, runtime, tagline, title
             FROM movie
-            WHERE $id = :id;
+            WHERE id = :id;
             SQL
         );
 
