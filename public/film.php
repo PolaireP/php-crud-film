@@ -19,6 +19,8 @@ try {
     $webpage = new AppWebPage();
     $webpage->setTitle($webpage->escapeString("Films - {$movie->getTitle()}"));
 
+    $webpage->appendCssUrl("css/page.css");
+
     $webpage->appendContent(
         <<<HTML
         <div class="details_film">
@@ -47,15 +49,17 @@ try {
 
         $webpage->appendContent(
             <<<HTML
-            <a href="acteur.php?peopleId={$people->getId()}">
-                <div class="profile_acteur">
-                    <img src="image.php?imageId={$people->getAvatarId()}">
-                </div>
-                <div class="infos_acteur">
-                    <div class="role_acteur">Rôle : {$cast->getRole()}</div>
-                    <div class="nom_acteur">Nom : {$people->getName()}</div>
-                </div>
-            </a>
+            <li>
+                <a href="acteur.php?peopleId={$people->getId()}">
+                    <div class="profile_acteur">
+                        <img src="image.php?imageId={$people->getAvatarId()}">
+                    </div>
+                    <div class="infos_acteur">
+                        <div class="role_acteur">Rôle : {$cast->getRole()}</div>
+                        <div class="nom_acteur">Nom : {$people->getName()}</div>
+                    </div>
+                </a>
+            </li>
             HTML
         );
     }

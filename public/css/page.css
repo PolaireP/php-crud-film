@@ -1,0 +1,62 @@
+.content {
+    justify-content: normal;
+}
+
+.details_film, .details_acteur {
+    display: flex;
+    margin: 20px;
+}
+
+.infos_film, infos_acteur {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.infos_film_titre_date {
+    display: flex;
+}
+
+.infos_film_titre_date > * {
+    margin: 10px;
+}
+
+.titre_original {
+    margin: 10px;
+}
+
+.resume {
+    margin: 10px;
+}
+
+.liste_acteurs_film li {
+    margin: 20px;
+}
+
+.liste_acteurs_film li a {
+    display: flex;
+}
+
+.liste_details_film li {
+    margin: 20px;
+}
+
+.liste_details_film li a {
+    display: flex;
+}
+
+.infos_acteur > * {
+    margin: 10px;
+}
+
+.infos_film > * {
+    margin: 10px;
+}
+
+.info_film_partie_sup {
+    display: flex;
+}
+
+.info_titre_date {
+    margin-left: 10px;
+}

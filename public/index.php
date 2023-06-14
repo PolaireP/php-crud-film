@@ -7,6 +7,8 @@ use Entity\Image;
 
 $webpage = new AppWebpage('Films');
 
+$webpage->appendCssUrl("css/style.css");
+
 $films = FilmCollection::findAll();
 
 foreach ($films as $movie) {
