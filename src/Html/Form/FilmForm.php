@@ -1,3 +1,8 @@
+<?php
+declare(strict_types=1);
+
+namespace Html\Form;
+
 use Entity\Film;
 use Entity\Collection\GenreCollection;
 use Entity\Exception\ParameterException;
@@ -6,35 +11,35 @@ use Html\Form\Html\StringEscaper;
 class FilmForm
 
 {
-use StringEscaper;
-private ?Film $film;
+    use StringEscaper;
+    private ?Film $film;
 
-/**
-* @param Film|null $film
-*/
-public function __construct(?Film $film)
-{
-$this->film = $film;
-}
+    /**
+     * @param Film|null $film
+     */
+    public function __construct(?Film $film)
+    {
+        $this->film = $film;
+    }
 
-/**
-* @return Film|null
-*/
-public  function getFilm(): ?Film{
-return $this->film;
-}
+    /**
+     * @return Film|null
+     */
+    public  function getFilm(): ?Film{
+        return $this->film;
+    }
 
-public static function getHtmlForm(string $action) : string {
+    public static function getHtmlForm(string $action) : string {
 
-$genres = GenreCollection::findAll();
-$genreChoices = <<<HTML
-<fieldset>
-    <legend>Choix des genres</legend>
+        $genres = GenreCollection::findAll();
+        $genreChoices = <<<HTML
+    <fieldset>
+        <legend>Choix des genres</legend>
     HTML;
 
-    foreach ($genres as $elem) {
-    $genreChoices = $genreChoices.
-    <<<HTML
+        foreach ($genres as $elem) {
+            $genreChoices = $genreChoices.
+                <<<HTML
 
     <div>
         <input type="checkbox" name="genres[]" value="{$elem->getId()}">
@@ -42,9 +47,9 @@ $genreChoices = <<<HTML
     </div>
 
     HTML;}
-    $genreChoices = $genreChoices. '</fieldset>';
+        $genreChoices = $genreChoices. '</fieldset>';
 
-return $main = <<<HTML
+        return $main = <<<HTML
 <form method="post" action="{$action}">
     <div><label>Titre :</label><input type="text" name="title"></div>
     <div><label>Langue originale :</label><input name="originalLanguage" type="text" required></div>
@@ -57,8 +62,9 @@ return $main = <<<HTML
     <input type="submit">
 </form>
 HTML;
+    }
+    public function setEntityFromQueryString():void {
+        if (!isset($_POST['id'])) {
+            $id = null;}
+    }
 }
-
-public function setEntityFromQueryString():void {
-if (!isset($_POST['id'])) {
-$id = null;
