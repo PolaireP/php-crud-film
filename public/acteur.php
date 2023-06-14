@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use Entity\Collection\CastCollection;
 use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
+use Entity\Film;
 use Entity\Image;
 use Entity\People;
 use Html\AppWebpage;
@@ -60,8 +62,45 @@ try {
         $webpage->appendContent("<div class='biographie'>{$people->getBiography()}</div>");
     }
 
+    // Fermeture de la div infos_acteur et details_acteur
     $webpage->appendContent("</div></div>");
 
+    // Liste des films dans lequelle la personne a eu un rôle
+
+    $listeCastsActeur = CastCollection::findByPeopleId($peopleId);
+    // Début liste des films dans lequelle a joué la personne
+    $webpage->appendContent("<ul class='liste_details_film'>");
+
+    foreach ($listeCastsActeur as $cast) {
+        $film = Film::findById($cast->getMovieId());
+
+        if ($film->getPosterId() == null) {
+            $urlImg = "";
+        } else {
+            $urlImg = "image.php?imageId={$film->getPosterId()}";
+        }
+
+        $webpage->appendContent(
+            <<<HTML
+            <div class="poster">
+                <img src="$urlImg">
+            </div>
+            <div class="infos_film">
+                <div class="info_film_partie_sup">
+                    <div class="info_titre_film">{$film->getTitle()}</div>
+                    <div class="info_titre_date">{$film->getReleaseDate()}</div>
+                </div>
+                <div class="info_film_partie_inf">
+                    <div class="info_role">{$cast->getRole()}</div>
+                </div>
+            </div>
+            HTML
+        );
+
+    }
+
+    // Fin liste film
+    $webpage->appendContent("</ul>");
     echo $webpage->toHTML();
 
 } catch (ParameterException) {
