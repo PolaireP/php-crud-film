@@ -82,6 +82,7 @@ try {
 
         $webpage->appendContent(
             <<<HTML
+            <a href="film.php?movieId={$film->getId()}">
             <div class="poster">
                 <img src="$urlImg">
             </div>
@@ -94,6 +95,7 @@ try {
                     <div class="info_role">{$cast->getRole()}</div>
                 </div>
             </div>
+            </a>
             HTML
         );
 
