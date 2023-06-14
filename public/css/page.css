@@ -5,9 +5,10 @@
 .details_film, .details_acteur {
     display: flex;
     margin: 20px;
+    width: 100%;
 }
 
-.infos_film, infos_acteur {
+.infos_film, .infos_acteur {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -17,8 +18,8 @@
     display: flex;
 }
 
-.infos_film_titre_date > * {
-    margin: 10px;
+.infos_film_date {
+    margin-left: 10px;
 }
 
 .titre_original {
@@ -59,4 +60,9 @@
 
 .info_titre_date {
     margin-left: 10px;
+}
+
+.infos_film button {
+    font-weight: bold;
+    padding: 5px;
 }

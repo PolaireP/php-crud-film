@@ -57,3 +57,10 @@ ul {
     margin: 5px;
 }
 
+.createFilm {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+    padding: 10px;
+    font-weight: bold;
+}

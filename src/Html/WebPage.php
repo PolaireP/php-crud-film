@@ -138,7 +138,8 @@ class WebPage
      */
     public function getLastModification(): string
     {
-        return date(format: 'r', timestamp: getlastmod());
+        date_default_timezone_set('Europe/Paris');
+        return "Dernière modification : " . date("F d Y H:i:s.", getlastmod());
     }
 
     /** Mise en forme de la page web sous format HTML
