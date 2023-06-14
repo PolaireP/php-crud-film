@@ -24,7 +24,7 @@ class Genre
         return $this->name;
     }
 
-    public function findbyId(int $id) {
+    public static function findbyId(int $id) {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
             SELECT *

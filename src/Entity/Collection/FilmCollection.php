@@ -13,7 +13,7 @@ class FilmCollection
     /**
     * @return array
      */
-    public function findAll(): array {
+    public static function findAll(): array {
 
         $request = MyPdo::getInstance()->prepare(
             <<<SQL
@@ -29,7 +29,7 @@ class FilmCollection
     * @param int $id
     * @return array
      */
-    public function findByGenreId(int $id): array {
+    public static function findByGenreId(int $id): array {
         $request = MyPdo::getInstance()->prepare(
             <<<SQL
                 SELECT *

@@ -14,7 +14,7 @@ class GenreCollection
     * @param int $id
     * @return array
      */
-    public function findByMovieId(int $id) : array {
+    public static function findByMovieId(int $id) : array {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
                 SELECT *
@@ -31,7 +31,7 @@ class GenreCollection
     /**
     * @return array
      */
-    public function findAll() : array {
+    public static function findAll() : array {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
                 SELECT *
