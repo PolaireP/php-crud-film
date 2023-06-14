@@ -146,13 +146,12 @@ class Cast
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-            INSERT INTO cast (id, movieId, peopleId, role, orderIndex)
-            VALUES (:id, :movieId, :peopleId, :role, :orderIndex)
+            INSERT INTO cast (movieId, peopleId, role, orderIndex)
+            VALUES (:movieId, :peopleId, :role, :orderIndex)
         SQL
         );
 
-        $stmt->execute([':id' => $this->id,
-                        ':movieId' => $this->movieId,
+        $stmt->execute([':movieId' => $this->movieId,
                         ':peopleId' => $this->peopleId,
                         ':role' => $this->role,
                         ':orderIndex' => $this->orderIndex]);

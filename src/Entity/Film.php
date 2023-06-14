@@ -172,7 +172,7 @@ class Film
         );
 
         $stmt -> execute([":id" => $id]);
-        $stmt -> setFetchMode(mode:PDO::FETCH_CLASS, className: Film::class);
+        $stmt -> setFetchMode(PDO::FETCH_CLASS, Film::class);
         if (($request = $stmt->fetch()) !== false) {
             return $request;
         } else {
@@ -225,12 +225,12 @@ class Film
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                    INSERT INTO film (id, originalLanguage, originalTitle, overview, runtime, tagline, title)
-                    VALUES (:id, :originalLanguage, :originalTitle, :overview, :runtime, :tagline, :title)
+                    INSERT INTO film ( originalLanguage, originalTitle, overview, runtime, tagline, title)
+                    VALUES (:originalLanguage, :originalTitle, :overview, :runtime, :tagline, :title)
                 SQL
         );
 
-        $stmt->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
+        $stmt->execute([':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
             ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
         $this->id = intval(MyPdo::getInstance()->lastInsertId());
 
