@@ -31,7 +31,7 @@ class CastCollection
         return $stmt->fetchAll(PDO::FETCH_CLASS, Cast::class);
     }
 
-    public static function findByMovieId(int $movieId): Cast
+    public static function findByMovieId(int $movieId): array
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<SQL
@@ -43,15 +43,10 @@ class CastCollection
 
         $stmt->execute([':movieId' => $movieId]);
 
-        $stmt->setFetchMode(PDO::FETCH_CLASS, Cast::class);
-        if (($object = $stmt->fetch()) !== false) {
-            return $object;
-        } else {
-            throw new EntityNotFoundException('ID de film introuvable');
-        }
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Cast::class);
     }
 
-    public static function findByPeopleId(int $peopleId): Cast
+    public static function findByPeopleId(int $peopleId): array
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<SQL
@@ -63,12 +58,7 @@ class CastCollection
 
         $stmt->execute([':peopleId' => $peopleId]);
 
-        $stmt->setFetchMode(PDO::FETCH_CLASS, Cast::class);
-        if (($object = $stmt->fetch()) !== false) {
-            return $object;
-        } else {
-            throw new EntityNotFoundException('ID de personne introuvable');
-        }
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Cast::class);
     }
 
 }
