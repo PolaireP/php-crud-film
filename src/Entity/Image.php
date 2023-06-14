@@ -27,7 +27,7 @@ class Image
     * @param int $id
     * @return Image
      */
-    public function findbyId(int $id) : Image {
+    public static function findbyId(int $id) : Image {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
             SELECT *
