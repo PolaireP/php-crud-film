@@ -42,4 +42,24 @@ class GenreCollection
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, Genre::class);
     }
+
+    public static function createMovieGenre(int $movieId, int $genreId) {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+                    INSERT INTO movie_genre (movieId, genreId)
+                    VALUES (:movieId, :genreId)
+                SQL
+        );
+        $stmt->execute([':movieId' => $movieId, ':genreId' => $genreId]);
+    }
+
+    public static function deleteMovieGenre(int $movieId, int $genreId) {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<SQL
+                    DELETE FROM movie_genre
+                    WHERE movieId = :movieId AND genreId = :genreId)
+                SQL
+        );
+        $stmt->execute([':movieId' => $movieId, ':genreId' => $genreId]);
+    }
 }
