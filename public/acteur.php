@@ -21,7 +21,7 @@ try {
     $webpage->setTitle($webpage->escapeString("Films - {$people->getName()}"));
 
     if ($people->getAvatarId() == null) {
-        $urlImg = "";
+        $urlImg = "img/actor.png";
     } else {
         $urlImg = "image.php?imageId={$people->getAvatarId()}";
     }
@@ -75,7 +75,7 @@ try {
         $film = Film::findById($cast->getMovieId());
 
         if ($film->getPosterId() == null) {
-            $urlImg = "";
+            $urlImg = "img/movie.png";
         } else {
             $urlImg = "image.php?imageId={$film->getPosterId()}";
         }
