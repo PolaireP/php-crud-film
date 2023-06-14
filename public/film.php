@@ -41,8 +41,17 @@ try {
                 <div class="titre_original">{$movie->getOriginalTitle()}</div>
                 <div class="slogan">{$movie->getTagline()}</div>
                 <div class="resume">{$movie->getOverview()}</div>
+                <button class="editFilm" type="button">
+                    <a href="editFilm.php">Modifier film</a>
+                </button>
+                <button class="deleteFilm" type="button">
+                    <a href="deleteFilm.php">Supprimer film</a>
+                </button>
+                <button class="addActor" type="button">
+                    <a href="addActor.php">Ajouter acteur</a>
+                </button>
             </div>  
-        </div> 
+        </div>
         HTML
     );
 

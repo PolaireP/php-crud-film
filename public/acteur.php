@@ -22,6 +22,7 @@ try {
 
     $webpage->appendCssUrl("css/page.css");
 
+
     if ($people->getAvatarId() == null) {
         $urlImg = "img/actor.png";
     } else {
