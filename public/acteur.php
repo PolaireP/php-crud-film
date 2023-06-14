@@ -20,6 +20,8 @@ try {
     $webpage = new AppWebPage();
     $webpage->setTitle($webpage->escapeString("Films - {$people->getName()}"));
 
+    $webpage->appendCssUrl("css/page.css");
+
     if ($people->getAvatarId() == null) {
         $urlImg = "img/actor.png";
     } else {
@@ -82,6 +84,7 @@ try {
 
         $webpage->appendContent(
             <<<HTML
+            <li>
             <a href="film.php?movieId={$film->getId()}">
             <div class="poster">
                 <img src="$urlImg">
@@ -96,6 +99,7 @@ try {
                 </div>
             </div>
             </a>
+            </li>
             HTML
         );
 

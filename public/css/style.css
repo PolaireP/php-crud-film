@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Gotham:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Gotham', sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+    height: 100%;
+}
+
+header {
+    margin: 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+    justify-content: center;
+    height: 90%;
+    overflow: auto;
+}
+
+.movieCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 10px 50px 10px 50px;
+    flex: 3;
+}
+
+.movieCard > * {
+    margin: 5px;
+}
+

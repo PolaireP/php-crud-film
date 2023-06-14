@@ -248,15 +248,14 @@ class Film
      * @param string $title
      * @return Film
      */
-    public static function create(?int $id=null, string $originalLanguage, string $originalTitle, string $overview,
-                                  string $releaseDate, int $runtime, string $tagline, string $title ): Film
+    public static function create(string $originalLanguage, string $originalTitle, string $overview,
+                                  string $releaseDate, int $runtime, string $tagline, string $title, ?int $id=null ): Film
     {
         $film = new Film();
         $film->setId($id);
         $film->setOverview($overview);
         $film->setOriginalLanguage($originalLanguage);
         $film->setOriginalTitle($originalTitle);
-        $film->setOverview($overview);
         $film->setReleaseDate($releaseDate);
         $film->setRuntime($runtime);
         $film->setTagline($tagline);
