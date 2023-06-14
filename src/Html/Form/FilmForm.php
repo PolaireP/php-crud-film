@@ -64,7 +64,7 @@ class FilmForm
             HTML;
     }
 
-    public function setEntityFromQueryString:void {
+    public function setEntityFromQueryString():void {
         if (!isset($_POST['id'])) {
             $id = null;
         } else {
