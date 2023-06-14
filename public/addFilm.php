@@ -16,3 +16,5 @@ $genres = $_POST['genres'];
 foreach ($genres as $key => $elem) {
     GenreCollection::createMovieGenre($movieId, intval($elem));
 }
+
+

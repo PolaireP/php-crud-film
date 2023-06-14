@@ -20,7 +20,7 @@ class GenreCollection
                 SELECT *
                 FROM genre g
                 JOIN movie_genre m ON m.genreId = g.id
-                WHERE g.movieId = :movieId
+                WHERE m.movieId = :movieId
             SQL);
 
         $stmt->execute([':movieId' => $id]);
@@ -56,8 +56,9 @@ class GenreCollection
     public static function deleteMovieGenre(int $movieId, int $genreId) {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                    DELETE FROM movie_genre
-                    WHERE movieId = :movieId AND genreId = :genreId)
+                    DELETE
+                    FROM movie_genre
+                    WHERE movieId = :movieId AND genreId = :genreId
                 SQL
         );
         $stmt->execute([':movieId' => $movieId, ':genreId' => $genreId]);
