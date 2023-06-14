@@ -172,7 +172,7 @@ class Film
         );
 
         $stmt -> execute([":id" => $id]);
-        $stmt -> setFetchMode(mode:PDO::FETCH_CLASS, className: Film::class);
+        $stmt -> setFetchMode(PDO::FETCH_CLASS, Film::class);
         if (($request = $stmt->fetch()) !== false) {
             return $request;
         } else {

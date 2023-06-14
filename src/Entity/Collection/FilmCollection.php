@@ -25,7 +25,6 @@ class FilmCollection
 
             return $request->fetchAll(PDO::FETCH_CLASS, Film::class);
     }
-
     /**
     * @param int $id
     * @return array
