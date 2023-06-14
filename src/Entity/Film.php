@@ -209,12 +209,13 @@ class Film
                     overview = :overview,
                     runtime = :runtime,
                     tagline = :tagline,
-                    title = :title
+                    title = :title,
+                    releaseDate = STR_TO_DATE(:releaseDate, '%Y-%m-%d')
                 WHERE id = :id
             SQL);
 
         $request->execute([':id' => $this->id, ':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
-            ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
+            ':overview' => $this->overview, ':releaseDate'=>$this->releaseDate, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
         return $this;
     }
 
