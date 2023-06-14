@@ -10,8 +10,8 @@ use PDO;
 
 class People
 {
-    private ?int $avatarId;
     private int $id;
+    private ?int $avatarId;
     private ?string $birthday;
     private ?string $deathday;
     private string $name;
@@ -26,6 +26,15 @@ class People
     {
         return $this->id;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getAvatarId(): ?int
+    {
+        return $this->avatarId;
+    }
+
 
     /**
      * @return string
