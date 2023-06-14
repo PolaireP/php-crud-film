@@ -256,7 +256,6 @@ class Film
         $film->setOverview($overview);
         $film->setOriginalLanguage($originalLanguage);
         $film->setOriginalTitle($originalTitle);
-        $film->setOverview($overview);
         $film->setReleaseDate($releaseDate);
         $film->setRuntime($runtime);
         $film->setTagline($tagline);
