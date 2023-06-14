@@ -68,7 +68,13 @@ class FilmForm
     public function getEditHtmlForm(string $action) : string {
 
         $genres = GenreCollection::findAll();
+        $checkedGenresId = array();
         $checkedGenres = GenreCollection::findByMovieId($this->film->getId());
+
+        foreach ($checkedGenres as $elem) {
+            array_push($checkedGenresId, $elem->getId());
+        }
+
         $genreChoices = <<<HTML
     <fieldset>
         <legend>Choix des genres</legend>
@@ -77,7 +83,7 @@ class FilmForm
 
 
         foreach ($genres as $elem) {
-            if (in_array($elem, $checkedGenres)) {
+            if (in_array($elem->getId(), $checkedGenresId)) {
                 $genreChoices = $genreChoices.
                     <<<HTML
 
