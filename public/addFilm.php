@@ -11,8 +11,6 @@ $form -> setEntityFromQueryString();
 $form->getFilm()->save();
 
 $movieId = intval(MyPdo::getInstance()->lastInsertId());
-
-var_dump($_POST['genres']);
 $genres = $_POST['genres'];
 
 foreach ($genres as $key => $elem) {
