@@ -225,13 +225,13 @@ class Film
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                    INSERT INTO movie ( originalLanguage, originalTitle, overview, runtime, tagline, title)
-                    VALUES (:originalLanguage, :originalTitle, :overview, :runtime, :tagline, :title)
+                    INSERT INTO movie ( originalLanguage, originalTitle, overview, releaseDate, runtime, tagline, title)
+                    VALUES (:originalLanguage, :originalTitle, :overview, STR_TO_DATE(:releaseDate, '%Y-%m-%d'), :runtime, :tagline, :title)
                 SQL
         );
 
         $stmt->execute([':originalLanguage' => $this->originalLanguage, ':originalTitle' => $this->originalTitle,
-            ':overview' => $this->overview, ':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
+            ':overview' => $this->overview, ':releaseDate'=>$this->releaseDate ,':runtime' => $this->runtime, ':tagline' => $this->tagline ,':title' => $this->title]);
         $this->id = intval(MyPdo::getInstance()->lastInsertId());
 
         return $this;
