@@ -5,6 +5,7 @@ namespace Entity;
 
 use Database\MyPdo;
 use PDO;
+use Entity\Exception\EntityNotFoundException;
 class Image
 {
     private int $id;
@@ -36,7 +37,7 @@ class Image
         );
 
         $stmt -> execute([":id" => $id]);
-        $stmt -> setFetchMode(mode:PDO::FETCH_CLASS, className: Image::class);
+        $stmt -> setFetchMode(PDO::FETCH_CLASS, Image::class);
         if (($request = $stmt->fetch()) !== false) {
             return $request;
         } else {
