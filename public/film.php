@@ -21,11 +21,17 @@ try {
 
     $webpage->appendCssUrl("css/page.css");
 
+    if (($movie->getPosterId()) === null) {
+        $image = '/img/movie.png';
+    } else {
+        $image = 'image.php?imageId='.$movie->getPosterId();
+    }
+
     $webpage->appendContent(
         <<<HTML
         <div class="details_film">
             <div class="poster_film">
-                <img src="image.php?imageId={$movie->getPosterId()}">
+                <img src="{$image}">
             </div>
             <div class="infos_film">
                 <div class="infos_film_titre_date">
@@ -56,12 +62,17 @@ try {
     foreach ($listeCastsActeur as $cast) {
         $people = People::findById($cast->getPeopleId());
 
+        if ($people->getAvatarId() === null) {
+            $actorImage = '/img/actor.png';
+        } else {
+            $actorImage = 'acteur.php?peopleId='. $people->getAvatarId();
+        }
         $webpage->appendContent(
             <<<HTML
             <li>
                 <a href="acteur.php?peopleId={$people->getId()}">
                     <div class="profile_acteur">
-                        <img src="image.php?imageId={$people->getAvatarId()}">
+                        <img src="{$actorImage}">
                     </div>
                     <div class="infos_acteur">
                         <div class="role_acteur">Rôle : {$cast->getRole()}</div>
