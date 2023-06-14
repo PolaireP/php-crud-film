@@ -1,19 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
 use Html\WebPage;
-use Entity\Cover;
+use Entity\Image;
 
 try {
-    ///////////////////////
-    // À vous de jouer ! //
-    ///////////////////////
-    if (!isset($_GET['coverId']) || !is_numeric($_GET['coverId'])){
+    if (!isset($_GET['imageId']) || !is_numeric($_GET['imageId'])){
         throw new ParameterException('Paramètre incorrect');
     }
-    $couverture = Image::findById(intval($_GET['coverId']));
+    $img = Image::findById(intval($_GET['imageId']));
 } catch (ParameterException) {
     http_response_code(400);
 } catch (EntityNotFoundException) {
@@ -23,4 +21,4 @@ try {
 }
 
 header('Content-Type: image/jpeg');
-echo($couverture->getJpeg());
+echo($img->getJpeg());
