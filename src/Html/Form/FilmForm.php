@@ -107,6 +107,7 @@ class FilmForm
 
         return $main = <<<HTML
         <form method="post" action="{$action}">
+            <input type="hidden" name="id" value="{$this->film->getId()}" >
             <div><label>Titre :</label><input type="text" name="title" value="{$this->film->getTitle()}"></div>
             <div><label>Langue originale :</label><input name="originalLanguage" type="text" value="{$this->film->getOriginalLanguage()}" required></div>
             <div><label>Titre original :</label><input type="text" name="originalTitle" value="{$this->film->getOriginalTitle()}"  required></div>
@@ -121,6 +122,19 @@ class FilmForm
     }
     public function setEntityFromQueryString():void {
         if (!isset($_POST['id'])) {
-            $id = null;}
+            $id = null;
+        } else {
+            $id = intval(StringEscaper::escapeString($_POST['id']));;
+        }
+
+        $originalLanguage = StringEscaper::escapeString($_POST['originalLanguage']);
+        $originalTitle = StringEscaper::escapeString($_POST['originalTitle']);
+        $overview = StringEscaper::escapeString($_POST['overview']);
+        $releaseDate = StringEscaper::escapeString($_POST['releaseDate']);
+        $runtime = intval(StringEscaper::escapeString($_POST['runtime']));
+        $tagline = StringEscaper::escapeString($_POST['tagline']);
+        $title = StringEscaper::escapeString($_POST['title']);
+        $this->film = Film::create($id,$originalLanguage, $originalTitle, $overview,$releaseDate,  $runtime,  $tagline,  $title);
     }
+
 }
