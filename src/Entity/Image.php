@@ -32,7 +32,7 @@ class Image
             <<<SQL
             SELECT *
             FROM image
-            WHERE $id = :id;
+            WHERE id = :id;
             SQL
         );
 

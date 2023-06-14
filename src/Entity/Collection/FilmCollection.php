@@ -18,7 +18,7 @@ class FilmCollection
         $request = MyPdo::getInstance()->prepare(
             <<<SQL
                 SELECT *
-                FROM film
+                FROM movie
             SQL);
 
             $request->execute();
@@ -33,7 +33,7 @@ class FilmCollection
         $request = MyPdo::getInstance()->prepare(
             <<<SQL
                 SELECT *
-                FROM film f
+                FROM movie f
                 JOIN movie_genre m ON m.movieId = f.id
                 WHERE m.genreId = :genreId
             SQL);

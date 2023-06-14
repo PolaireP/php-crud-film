@@ -187,7 +187,7 @@ class Film
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                DELETE FROM film
+                DELETE FROM movie
                 WHERE id = ?
             SQL
         );
@@ -203,7 +203,7 @@ class Film
     protected function update(): Film
     {
         $request = MyPdo::getInstance()->prepare(<<<SQL
-                UPDATE film
+                UPDATE movie
                 SET originalLanguage = :originalLanguage,
                     originalTitle = :originalTitle,
                     overview = :overview,
@@ -225,7 +225,7 @@ class Film
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                    INSERT INTO film ( originalLanguage, originalTitle, overview, runtime, tagline, title)
+                    INSERT INTO movie ( originalLanguage, originalTitle, overview, runtime, tagline, title)
                     VALUES (:originalLanguage, :originalTitle, :overview, :runtime, :tagline, :title)
                 SQL
         );
