@@ -56,8 +56,9 @@ class GenreCollection
     public static function deleteMovieGenre(int $movieId, int $genreId) {
         $stmt = MyPdo::getInstance()->prepare(
             <<<SQL
-                    DELETE FROM movie_genre
-                    WHERE movieId = :movieId AND genreId = :genreId)
+                    DELETE
+                    FROM movie_genre
+                    WHERE movieId = :movieId AND genreId = :genreId
                 SQL
         );
         $stmt->execute([':movieId' => $movieId, ':genreId' => $genreId]);
