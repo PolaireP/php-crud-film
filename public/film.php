@@ -42,13 +42,13 @@ try {
                 <div class="slogan">{$movie->getTagline()}</div>
                 <div class="resume">{$movie->getOverview()}</div>
                 <button class="editFilm" type="button">
-                    <a href="editFilm.php">Modifier film</a>
+                    <a href="editFilm.php?movieId={$movieId}">Modifier film</a>
                 </button>
                 <button class="deleteFilm" type="button">
-                    <a href="deleteFilm.php">Supprimer film</a>
+                    <a href="deleteFilm?movieId={$movieId}.php">Supprimer film</a>
                 </button>
                 <button class="addActor" type="button">
-                    <a href="addActor.php">Ajouter acteur</a>
+                    <a href="addActor.php?movieId={$movieId}">Ajouter acteur</a>
                 </button>
             </div>  
         </div>
@@ -62,17 +62,12 @@ try {
     foreach ($listeCastsActeur as $cast) {
         $people = People::findById($cast->getPeopleId());
 
-        if ($people->getAvatarId() === null) {
-            $actorImage = '/img/actor.png';
-        } else {
-            $actorImage = 'acteur.php?peopleId='. $people->getAvatarId();
-        }
         $webpage->appendContent(
             <<<HTML
             <li>
                 <a href="acteur.php?peopleId={$people->getId()}">
                     <div class="profile_acteur">
-                        <img src="{$actorImage}">
+                        <img src="image.php?imageId={$people->getAvatarId()}">
                     </div>
                     <div class="infos_acteur">
                         <div class="role_acteur">Rôle : {$cast->getRole()}</div>
