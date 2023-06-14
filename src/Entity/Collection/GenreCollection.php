@@ -20,7 +20,7 @@ class GenreCollection
                 SELECT *
                 FROM genre g
                 JOIN movie_genre m ON m.genreId = g.id
-                WHERE g.movieId = :movieId
+                WHERE m.movieId = :movieId
             SQL);
 
         $stmt->execute([':movieId' => $id]);
